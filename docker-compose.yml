@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+  db:
+    ports:
+      - '27017:27017'
+    container_name: api-mongo
+    restart: always
+    logging:
+        options:
+            max-size: 1g
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+        - MONGO_INITDB_ROOT_PASSWORD=bdung
+    image: mongo
+  
+  redis:
+    container_name: cache
+    image: "redis:6.2.6-alpine"
+    command: redis-server --save 60 1 --requirepass redis123 --loglevel warning
+    hostname: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/var/lib/redis/data
+
+
+  server:
+    container_name: web-api
+    build:
+      context: ./
+      dockerfile: 'Dockerfile.dev'
+    image: parallel-api
+    command: npm run dev
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+      - /app/src/logs
+    
+volumes:
+  redis-data:
