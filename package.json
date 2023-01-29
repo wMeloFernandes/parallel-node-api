@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "",
+    "prepare": "husky install",
+    "lint":"eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,12 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.16",
-    "@types/node": "^18.11.18"
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0"
   }
 }
