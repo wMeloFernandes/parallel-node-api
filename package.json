@@ -19,6 +19,7 @@
   "homepage": "https://github.com/wMeloFernandes/parallel-node-api#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^6.9.0",
     "redis": "^4.6.3"
   },
   "devDependencies": {
