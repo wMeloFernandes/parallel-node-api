@@ -1,3 +1,4 @@
+import { InvoicesController } from '../main/routes/associations-routes'
 import { Server } from '@overnightjs/core'
 import { json, urlencoded } from 'body-parser'
 import helmet from 'helmet'
@@ -36,7 +37,9 @@ export class SetupServer extends Server {
 
 	// Setup of controllers to enabled routes associated to it
 	private setupControllers (): void {
-		this.addControllers([])
+		this.addControllers([
+			new InvoicesController()
+		])
 	}
 
 	// Starting Server
