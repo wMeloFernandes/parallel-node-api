@@ -3,6 +3,7 @@ import { Controller, Get, Post, Patch, Delete } from '@overnightjs/core'
 import { HttpResponse } from '../protocols/http-response'
 import { ListInvoices } from '../../data/usecases/invoices/list-invoices'
 import { AddInvoice } from '../../data/usecases/invoices/add-invoice'
+import { ListInvoiceById } from '../../data/usecases/invoices/list-invoice-by-id'
 
 @Controller('api/v1/invoices')
 export class InvoicesController {
@@ -17,7 +18,8 @@ export class InvoicesController {
 
 	@Get(':id')
 	public async get (req: Request, res: Response): Promise<Response<HttpResponse>> {
-		return res.status(200).json({})
+		const result = await new ListInvoiceById().handle(req.params.id)
+		return res.status(result.statusCode).json(result.body)
 	}
 
 	@Post('')
