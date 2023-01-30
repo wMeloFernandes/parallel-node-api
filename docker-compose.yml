@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.7'
 
 services:
   db:
@@ -9,10 +9,15 @@ services:
     logging:
         options:
             max-size: 1g
-    environment:
-        - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-        - MONGO_INITDB_ROOT_PASSWORD=bdung
     image: mongo
+    env_file:
+      - .env
+    environment:
+        MONGO_INITDB_USERNAME: ${DB_USERNAME}
+        MONGO_INITDB_PASSWORD: ${DB_PASSWORD}
+        MONGO_INITDB_DATABASE: ${DB_DATABASE}
+    volumes:
+      - mongo-data:/data/db 
   
   redis:
     container_name: cache
@@ -37,8 +42,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./:/app
-      - /app/src/logs
-    
+      - ./:/app    
 volumes:
+  mongo-data:
   redis-data:
