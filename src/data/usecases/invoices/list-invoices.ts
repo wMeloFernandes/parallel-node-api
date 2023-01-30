@@ -7,7 +7,7 @@ export class ListInvoices {
 	async handle (): Promise<HttpResponse> {
 		try {
 			const invoices = await Invoice.find()
-			return HttpResponse.build().code(201).result(invoices)
+			return HttpResponse.build().code(200).result(invoices)
 		}
 		catch (err) {
 			return HttpResponse.build().code(500).result({ message: 'internalServerError' })
