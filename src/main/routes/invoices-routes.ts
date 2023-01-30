@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
-import { Controller, Get, Post, Patch, Delete, Middleware } from '@overnightjs/core'
+import { Controller, Get, Post, Patch, Delete } from '@overnightjs/core'
 import { HttpResponse } from '../protocols/http-response'
+import { ListInvoices } from '../../data/usecases/invoices/list-invoices'
+import { AddInvoice } from '../../data/usecases/invoices/add-invoice'
 
 @Controller('api/v1/invoices')
 export class InvoicesController {
@@ -9,7 +11,8 @@ export class InvoicesController {
 
 	@Get('')
 	public async getAll (req: Request, res: Response): Promise<Response<HttpResponse>> {
-		return res.status(200).json({})
+		const result = await new ListInvoices().handle()
+		return res.status((await result).statusCode).json(result.body)
 	}
 
 	@Get(':id')
@@ -19,7 +22,8 @@ export class InvoicesController {
 
 	@Post('')
 	public async create (req: Request, res: Response): Promise<Response<HttpResponse>> {
-		return res.status(200).json({})
+		const result = await new AddInvoice().handle(req.body)
+		return res.status(200).json(result)
 	}
 
 	@Patch('')
