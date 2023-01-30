@@ -1,4 +1,4 @@
-import { InvoicesController } from '../main/routes/associations-routes'
+import { InvoicesController } from '../main/routes/invoices-routes'
 import { Server } from '@overnightjs/core'
 import { json, urlencoded } from 'body-parser'
 import helmet from 'helmet'
