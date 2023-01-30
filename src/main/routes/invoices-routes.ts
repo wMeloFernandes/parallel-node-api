@@ -11,19 +11,19 @@ export class InvoicesController {
 	) { }
 
 	@Get('')
-	public async getAll (req: Request, res: Response): Promise<Response<HttpResponse>> {
+	public async fetchAll (req: Request, res: Response): Promise<Response<HttpResponse>> {
 		const result = await new ListInvoices().handle()
 		return res.status((await result).statusCode).json(result.body)
 	}
 
 	@Get(':id')
-	public async get (req: Request, res: Response): Promise<Response<HttpResponse>> {
+	public async fetch (req: Request, res: Response): Promise<Response<HttpResponse>> {
 		const result = await new ListInvoiceById().handle(req.params.id)
 		return res.status(result.statusCode).json(result.body)
 	}
 
 	@Post('')
-	public async create (req: Request, res: Response): Promise<Response<HttpResponse>> {
+	public async add (req: Request, res: Response): Promise<Response<HttpResponse>> {
 		const result = await new AddInvoice().handle(req.body)
 		return res.status(200).json(result)
 	}
